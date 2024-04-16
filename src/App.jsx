@@ -7,8 +7,8 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={}/>
-        <Route path='/card/:id/*' element={}/>
+        {/* <Route path='/' element={}/>
+        <Route path='/card/:id/*' element={}/> */}
       </Routes>   
     </div>
   )
