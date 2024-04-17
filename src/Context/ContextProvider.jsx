@@ -1,22 +1,34 @@
-useEffect(() => {
-    // Initialize dark mode based on system preference
-    const initialDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    setDarkMode(initialDarkMode);
-  }, []);
+import React, {useContext, createContext, useEffect, useState} from 'react';
 
-  useEffect(() => {
-    // Apply dark mode when darkMode state changes
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      console.log("dark mode active");
-    } else {
-      document.documentElement.classList.remove("dark");
-      console.log("light mode active");
-    }
-  }, [darkMode]);
 
-  const handleDarkMode = () => {
-    setDarkMode((prev) => !prev);
-  };
+
+export const appContext = createContext();
+
+const ContextProvider = ({children}) => {
+  
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const ToggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  }
+
+  
+
+
+
+  return (
+    <ContextProvider.Provider value={{isDarkMode, ToggleDarkMode}}>
+      {children}
+    </ContextProvider.Provider>
+  )
+}
+
+const useAppContext = () => {
+  const context =useContext(appContext);
+  if (!context) {
+    throw new Error('useAppContext must be used within a ThemeProvider')
+  }
+  return context
+}
+
+export {ContextProvider, useAppContext}
