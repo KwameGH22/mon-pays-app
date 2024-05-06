@@ -3,8 +3,9 @@ import React, {useContext, createContext, useEffect, useState} from 'react';
 
 
 export const appContext = createContext();
+const { Provider } = appContext;
 
-const ContextProvider = ({children}) => {
+ const ContextProvider = ({children}) => {
   
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -17,18 +18,19 @@ const ContextProvider = ({children}) => {
 
 
   return (
-    <ContextProvider.Provider value={{isDarkMode, ToggleDarkMode}}>
+    <Provider value={{isDarkMode, setIsDarkMode, ToggleDarkMode}}>
       {children}
-    </ContextProvider.Provider>
+    </Provider>
   )
 }
+export default ContextProvider
 
-const useAppContext = () => {
-  const context =useContext(appContext);
-  if (!context) {
-    throw new Error('useAppContext must be used within a ThemeProvider')
-  }
-  return context
-}
+// const useAppContext = () => {
+//   const context =useContext(appContext);
+//   if (!context) {
+//     throw new Error('useAppContext must be used within a rovider')
+//   }
+//   return context
+// }
 
-export {ContextProvider, useAppContext}
+// export {ContextProvider, useAppContext}

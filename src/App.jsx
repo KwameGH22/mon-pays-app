@@ -1,7 +1,17 @@
 import {Route, Routes} from 'react-router-dom';
+import { useEffect, useContext } from 'react';
+import  ContextProvider  from './Context/ContextProvider';
+import { appContext } from './Context/ContextProvider';
+import Home from './Pages/Home';
+import Page from './Pages/Page';
+
+
 
 
 function App() {
+
+ const {isDarkMode, setIsDarkMode} = useContext(appContext);
+
 
   useEffect(() => {
     // Initialize dark mode based on system preference
@@ -30,8 +40,8 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* <Route path='/' element={}/>
-        <Route path='/card/:id/*' element={}/> */}
+        <Route path='/' element={<Home/>}/>
+        <Route path='/card/:id/*' element={<Page/>}/>
       </Routes>   
     </div>
   )
